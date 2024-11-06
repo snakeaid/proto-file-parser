@@ -1,0 +1,58 @@
+// Basic elements
+WHITESPACE = _{ " " | "\t" | "\r" | "\n" }
+COMMENT = _{ "//" ~ (!"\n" ~ ANY)* | "/*" ~ (!"*/" ~ ANY)* ~ "*/" }
+
+// Identifiers and literals
+ident = @{ ASCII_ALPHA ~ (ASCII_ALPHANUMERIC | "_")* }
+string_literal = @{ "\"" ~ (!"\"" ~ ANY)* ~ "\"" }
+int_literal = @{ ASCII_DIGIT+ }
+float_literal = @{ ASCII_DIGIT+ ~ "." ~ ASCII_DIGIT* }
+
+// Message field numbers
+field_number = @{ ASCII_DIGIT+ }
+
+// Keywords
+syntax = { "syntax" ~ "=" ~ string_literal ~ ";" }
+package = { "package" ~ qualified_ident ~ ";" }
+import = { "import" ~ string_literal ~ ";" }
+option = { "option" ~ qualified_ident ~ "=" ~ string_literal ~ ";" }
+
+// Qualified identifiers (e.g., google.protobuf.Timestamp)
+qualified_ident = @{ ident ~ ("." ~ ident)* }
+
+// Field rules
+field_rule = { "optional" | "repeated" | "required" }
+
+// Type definitions
+type_name = { qualified_ident | "int32" | "int64" | "uint32" | "uint64" | "sint32" | "sint64" |
+              "fixed32" | "fixed64" | "sfixed32" | "sfixed64" | "float" | "double" |
+              "bool" | "string" | "bytes" }
+
+// Field definition
+field = { field_rule? ~ type_name ~ ident ~ "=" ~ field_number ~ ";" }
+
+// Enum definition
+enum_value = { ident ~ "=" ~ int_literal ~ ";" }
+enum_body = { "{" ~ enum_value* ~ "}" }
+enum_def = { "enum" ~ ident ~ enum_body }
+
+// Message definition (recursive)
+message_body = { "{" ~ (field | enum_def | message_def)* ~ "}" }
+message_def = { "message" ~ ident ~ message_body }
+
+// Service definition
+rpc_arg = { "(" ~ qualified_ident ~ ")" }
+rpc_def = { "rpc" ~ ident ~ rpc_arg ~ "returns" ~ rpc_arg ~ ";" }
+service_body = { "{" ~ rpc_def* ~ "}" }
+service_def = { "service" ~ ident ~ service_body }
+
+// Main file structure
+proto_file = {
+    SOI ~
+    syntax? ~
+    package? ~
+    import* ~
+    option* ~
+    (message_def | enum_def | service_def)* ~
+    EOI
+}
