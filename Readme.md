@@ -74,3 +74,19 @@ let parser = Parser::new();
 let json = parser.parse_file("input.proto")?;
 println!("{}", json);
 ```
+
+### Building and Testing
+
+```bash
+# Format code
+make format
+
+# Run tests
+make test
+
+# Run linter
+make lint
+
+# Run all checks before committing
+make pre-commit
+```
