@@ -56,13 +56,13 @@ rpc_def        = "rpc" ident "(" message_type ")"
 
 ```bash
 # Parse a .proto file and output JSON
-proto-parser parse input.proto
+proto-file-parser parse input.proto
 
 # Display help information
-proto-parser help
+proto-file-parser help
 
 # Show version and credits
-proto-parser version
+proto-file-parser version
 ```
 
 ### Library

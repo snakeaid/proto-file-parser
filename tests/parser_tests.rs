@@ -1,4 +1,4 @@
-use proto_parser::{Proto, ParserError};
+use proto_file_parser::{Proto, ParserError};
 
 #[test]
 fn test_parse_simple_message() -> Result<(), ParserError> {
