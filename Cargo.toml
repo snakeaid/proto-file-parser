@@ -5,6 +5,7 @@ edition = "2021"
 description = "A Protocol Buffer Definition (.proto) parser that converts proto files to JSON format"
 authors = ["Illia Antypenko i.antypenko@ukma.edu.ua"]
 repository = "https://github.com/yourusername/proto-file-parser"
+license = "MIT"
 
 [dependencies]
 pest = "2.7"
