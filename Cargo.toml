@@ -1,6 +1,6 @@
 [package]
 name = "proto-file-parser"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2021"
 description = "A Protocol Buffer Definition (.proto) parser that converts proto files to JSON format"
 authors = ["Illia Antypenko i.antypenko@ukma.edu.ua"]

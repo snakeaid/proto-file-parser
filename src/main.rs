@@ -29,7 +29,7 @@ Examples:
 "#;
 
 const CREDITS: &str = r#"
-Proto File Parser v0.1.0
+Proto File Parser v0.1.1
 
 Author:
   Illia Antypenko <i.antypenko@ukma.edu.ua>
