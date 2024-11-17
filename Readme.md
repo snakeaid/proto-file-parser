@@ -2,7 +2,8 @@
 
 A Rust library and CLI tool for parsing Protocol Buffer Definition (.proto) files into JSON format.
 
-https://crates.io/crates/proto-file-parser
+https://crates.io/crates/proto-file-parser  
+https://docs.rs/proto-file-parser/latest/proto_file_parser/
 
 ## Technical Description
 
